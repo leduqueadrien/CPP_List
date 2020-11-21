@@ -9,11 +9,11 @@ Cell::Cell(double reel) : Cell(reel, nullptr) {}
 Cell::Cell(double reel, Cell * suivant) : data(reel), svt(suivant) {}
 
 Cell * & Cell::getSvt(){
-    return svt;
+	return svt;
 }
 
 void Cell::display(std::ostream & os) const{
-    os << data;
+	os << data;
 }
 
 
@@ -21,62 +21,62 @@ void Cell::display(std::ostream & os) const{
 List::List() : debut(nullptr) {}
 
 bool List::empty() const{
-    return debut == nullptr;
+	return debut == nullptr;
 }
 
 void List::push_back (double reel) {
-    if (debut == nullptr) {
-        debut = new Cell(reel);
-    } else {
-        Cell * pCell = debut;
-        while((*pCell).getSvt() != nullptr)
-            pCell = (*pCell).getSvt();
-        (*pCell).getSvt() = new Cell(reel);
-    }
+	if (debut == nullptr) {
+		debut = new Cell(reel);
+	} else {
+		Cell * pCell = debut;
+		while((*pCell).svt != nullptr)
+			pCell = (*pCell).svt;
+		(*pCell).svt = new Cell(reel);
+	}
 }
 
 void List::push_front(double reel) {
-    if (debut == nullptr) {
-        debut = new Cell(reel);
-    } else {
-        Cell * tmp = debut;
-        debut = new Cell(reel, tmp);
-    }
+	if (debut == nullptr) {
+		debut = new Cell(reel);
+	} else {
+		Cell * tmp = debut;
+		debut = new Cell(reel, tmp);
+	}
 }
 
 Cell & List::front() {
-    return *debut;
+	return *debut;
 }
 
 Cell & List::back() {
-    if (debut == nullptr) {
-        throw std::invalid_argument("");
-    } else {
-        Cell * pCell = debut;
-        while((*pCell).getSvt() != nullptr)
-            pCell = (*pCell).getSvt();
-        return *pCell;
-    }
+	if (debut == nullptr) {
+		throw std::invalid_argument("");
+	} else {
+		Cell * pCell = debut;
+		while((*pCell).svt != nullptr)
+			pCell = (*pCell).svt;
+		return *pCell;
+	}
 }
 
 void List::display(std::ostream & os) const {
-    if (debut == nullptr) {
-        os << "liste vide" << std::endl;
-    } else {
-        Cell * pCell = debut;
-        while(pCell != nullptr) {
-            (*pCell).display(os);
-            os << std::endl;
-            pCell = (*pCell).getSvt();
-        }
-    }
+	if (debut == nullptr) {
+		os << "liste vide" << std::endl;
+	} else {
+		Cell * pCell = debut;
+		while(pCell != nullptr) {
+			(*pCell).display(os);
+			os << std::endl;
+			pCell = (*pCell).svt;
+		}
+	}
 }
 
 List::~List() {
-    Cell * pCell = debut;
-    while(pCell != nullptr) {
-        Cell * tmp = (*pCell).getSvt();
-        delete pCell;
-        pCell = tmp;
-    }
+	Cell * pCell = debut;
+	while(pCell != nullptr) {
+		Cell * tmp = (*pCell).svt;
+		delete pCell;
+		pCell = tmp;
+	}
 }
