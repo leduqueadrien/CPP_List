@@ -12,7 +12,7 @@ class Cell {
         Cell(double);
         Cell(double, Cell *);
         Cell * & getSvt();
-        void display(std::ostream) const;
+        void display(std::ostream &) const;
 
 };
 
@@ -23,7 +23,10 @@ class List {
     public:
         List();
         bool empty() const;
-        void push_back (double);
-        void display(std::ostream) const;
+        void push_back(double);
+        void push_front(double);
+        Cell & front();
+        Cell & back();
+        void display(std::ostream &) const;
         ~List();
 };
